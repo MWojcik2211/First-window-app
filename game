@@ -1,0 +1,189 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Unit1.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm1 *Form1;
+Integer Licz = 0;
+
+void __fastcall EmptySpotChecker(TButton* button1, TButton* button2)
+{
+   if (button2->Caption =="")
+   {
+       button2->Caption  = button1->Caption ;
+       button1->Caption ="";
+   }
+}
+//---------------------------------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner)
+        : TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+
+
+
+
+
+
+void __fastcall TForm1::bn1Click(TObject *Sender)
+{
+    EmptySpotChecker(bn1, bn2);
+    EmptySpotChecker(bn1, bn4);
+
+    Licz = Licz + 1;
+    lKlikniecia->Caption  = Licz;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::bn2Click(TObject *Sender)
+{
+    EmptySpotChecker(bn2, bn1);
+    EmptySpotChecker(bn2, bn3);
+    EmptySpotChecker(bn2, bn5);
+    Licz = Licz + 1;
+    lKlikniecia->Caption  = Licz;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::bn3Click(TObject *Sender)
+{
+    EmptySpotChecker(bn3, bn2);
+    EmptySpotChecker(bn3, bn6);
+    Licz = Licz + 1;
+    lKlikniecia->Caption  = Licz;
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::bn4Click(TObject *Sender)
+{
+    EmptySpotChecker(bn4, bn1);
+    EmptySpotChecker(bn4, bn5);
+    EmptySpotChecker(bn4, bn7);
+    Licz = Licz + 1;
+    lKlikniecia->Caption  = Licz;
+}
+//---------------------------------------------------------------------------
+
+ void __fastcall TForm1::bn6Click(TObject *Sender)
+{
+    EmptySpotChecker(bn6, bn3);
+    EmptySpotChecker(bn6, bn5);
+    EmptySpotChecker(bn6, bn9);
+    Licz = Licz + 1;
+    lKlikniecia->Caption  = Licz;
+}
+void __fastcall TForm1::bn5Click(TObject *Sender)
+{
+    EmptySpotChecker(bn5, bn2);
+    EmptySpotChecker(bn5, bn4);
+    EmptySpotChecker(bn5, bn6);
+    EmptySpotChecker(bn5, bn8);
+    Licz = Licz + 1;
+    lKlikniecia->Caption  = Licz;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::bn7Click(TObject *Sender)
+{
+    EmptySpotChecker(bn7, bn4);
+    EmptySpotChecker(bn7, bn8);
+    Licz = Licz + 1;
+    lKlikniecia->Caption  = Licz;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::bn8Click(TObject *Sender)
+{
+    EmptySpotChecker(bn8, bn5);
+    EmptySpotChecker(bn8, bn7);
+    EmptySpotChecker(bn8, bn9);
+    Licz = Licz + 1;
+    lKlikniecia->Caption  = Licz;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::bn9Click(TObject *Sender)
+{
+    EmptySpotChecker(bn9, bn6);
+    EmptySpotChecker(bn9, bn8);
+    Licz = Licz + 1;
+    lKlikniecia->Caption  = Licz;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::FormCreate(TObject *Sender)
+{
+       lKlikniecia->Caption = "0";
+       Licz = 0;
+       int ll[9], i, j, spr;
+       bool flag = false;
+       i = 1;
+       srand(time(NULL));
+       do
+       {
+         spr = ((rand() % 8) + 1);
+         for (j = 1; j < i; j++)
+         {
+           if (ll[j] == spr)
+           {
+             flag =true;
+             break;
+           }
+         }
+         if (flag == true)
+         {
+             flag = false;
+         }
+         else
+         {
+            ll[i] = spr;
+            i = i + 1;
+         }
+         }
+         while ( i <=8);
+
+         bn1->Caption = (ll[1]);
+         bn2->Caption = (ll[2]);
+         bn3->Caption = (ll[3]);
+         bn4->Caption = (ll[4]);
+         bn5->Caption = (ll[5]);
+         bn6->Caption = (ll[6]);
+         bn7->Caption = (ll[7]);
+         bn8->Caption = (ll[8]);
+         bn9->Caption = "";
+}
+
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::pWyjscieClick(TObject *Sender)
+{
+Close();        
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::pRozClick(TObject *Sender)
+{
+         bn1->Caption = "1";
+         bn2->Caption = "2";
+         bn3->Caption = "3";
+         bn4->Caption = "4";
+         bn5->Caption = "5";
+         bn6->Caption = "6";
+         bn7->Caption = "7";
+         bn8->Caption = "8";
+         bn9->Caption = "";        
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::pResetClick(TObject *Sender)
+{
+FormCreate(Sender);
+}
+
+//---------------------------------------------------------------------------
